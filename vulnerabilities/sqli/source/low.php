@@ -51,3 +51,6 @@ if( isset( $_REQUEST[ 'Submit' ] ) ) {
 			}
 			break;
 	} 
+}
+
+?>
