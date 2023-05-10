@@ -10,10 +10,8 @@ spec:
     spec:
       containers:
       - name: dvwa
-        image: gru.ocir.io/fortinetoraclecloud1/dvwa-fgallego:<TAG>
+        image: public.ecr.aws/f9n2h3p5/dvwapub:<TAG>
         imagePullPolicy: "Always"
-      imagePullSecrets:
-      - name: ocirsecret
   selector:
     matchLabels:
       app: dvwa
