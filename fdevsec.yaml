@@ -10,4 +10,7 @@ scanners:
   - secret
   - sca
   - iac
-  - container   
+  - container
+
+fail_pipeline:
+  risk_rating: 6
