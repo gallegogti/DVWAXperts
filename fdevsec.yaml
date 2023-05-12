@@ -1,0 +1,13 @@
+version: v1
+
+id:
+  org: 60128e83-07b2-447a-be47-7e3405a278ad
+  app: 0a96a684-9690-4b86-a336-b09082d2af63
+  
+  scanners:
+  - sast
+  #- dast
+  - secret
+  - sca
+  - iac
+  - containe
