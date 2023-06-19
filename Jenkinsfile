@@ -6,6 +6,7 @@ pipeline {
         IMAGE_TAG= "stdXXX"
         REPOSITORY_URI = "public.ecr.aws/f9n2h3p5/dvwapub"
         AWS_DEFAULT_REGION = "us-east-1"
+        scannerHome = tool 'SonarScanner'
     }
    
     stages {
@@ -45,13 +46,20 @@ pipeline {
          }
         }
       }
-      stage('SAST'){
+      /*stage('SAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
                  sh 'docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
             }
-        }
+        }*/
+      stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('AWSSonar') { // If you have configured more than one global server connection, you can specify its name
+                sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+      }  
       stage('Deploy'){
             steps {
                  sh 'sed -i "s/<TAG>/${IMAGE_TAG}-${BUILD_NUMBER}/" deployment.yml'
